@@ -37,13 +37,14 @@ import { onMounted, ref } from "vue";
 import axios from "axios";
 import router from "@/router";
 import AppBar from "@/components/AppBar.vue";
+import { beneficiariesEndpoint } from "@/service/requests";
 
 const token = localStorage.getItem("access_token");
 const beneficiaries = ref([]);
 
 onMounted(() =>
   axios
-    .get("http://localhost:8000/api/beneficiaries", {
+    .get(beneficiariesEndpoint, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
@@ -56,17 +57,12 @@ onMounted(() =>
 
 const searchBeneficiaries = async (event) => {
   const search = event.target.value;
-  console.log(search)
   await axios
-    .get(`http://localhost:8000/api/beneficiaries?name=${search}`, {
+    .get(`${beneficiariesEndpoint}?name=${search}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      console.log(response)
       beneficiaries.value = response.data;
-    })
-  .catch((err) => {
-    console.log(err)
-  });
+    });
 };
 </script>

@@ -46,6 +46,7 @@ import { ref } from "vue";
 import axios from "axios";
 import router from "@/router";
 import { useUserStore } from "@/store/usersStore";
+import { loginEndpoint } from "@/service/requests";
 
 const email = ref("");
 const password = ref("");
@@ -57,7 +58,7 @@ const login = async () => {
     password: password.value,
   };
 
-  await axios.post("http://localhost:8000/login", user).then((response) => {
+  await axios.post(loginEndpoint, user).then((response) => {
     localStorage.setItem("access_token", response.data.access_token);
   });
 
