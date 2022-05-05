@@ -8,7 +8,7 @@
       {{ userStore.email }}
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn>
+      <v-btn @click.prevent="logout">
         Logout
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -18,6 +18,12 @@
 
 <script setup>
 import { useUserStore } from "@/store/usersStore";
+import router from "@/router";
 
 const userStore = useUserStore();
+const logout = () => {
+  localStorage.clear();
+  userStore.logout();
+  router.push("login");
+}
 </script>
