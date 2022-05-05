@@ -12,6 +12,15 @@
           @input.prevent="searchBeneficiaries"
         ></v-text-field>
       </v-col>
+      <v-col cols="12" class="v-col-lg-2 mx-auto">
+        <v-btn
+          @click.prevent="router.push('/beneficiary/create')"
+          block="true"
+          class="bg-green-darken-3 elevation-0 mr-lg-2 my-2"
+        >
+          <v-icon>mdi-account-plus-outline</v-icon>
+        </v-btn>
+      </v-col>
       <v-col cols="12" class="v-col-lg-8 mx-auto">
         <v-table class="bg-brown-lighten-3 elevation-4">
           <thead>
