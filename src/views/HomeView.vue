@@ -1,18 +1,21 @@
 <template>
-  <hello-world />
+Hello
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup>
+import { onMounted } from "vue";
+import axios from "axios";
+import router from "@/router";
 
-// Components
-import HelloWorld from '../components/HelloWorld.vue';
+const token = localStorage.getItem("access_token");
 
-export default defineComponent({
-  name: 'HomeView',
-
-  components: {
-    HelloWorld,
-  },
-});
+onMounted(() =>
+  axios
+    .get("http://localhost:8000/api/beneficiaries", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .catch(() => {
+      router.push("login");
+    })
+)
 </script>

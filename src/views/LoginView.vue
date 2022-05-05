@@ -44,6 +44,7 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import router from "@/router";
 
 const email = ref("");
 const password = ref("");
@@ -57,5 +58,7 @@ const login = async () => {
   await axios.post("http://localhost:8000/login", user).then((response) => {
     localStorage.setItem("access_token", response.data.access_token);
   });
-}
+
+  await router.push("/");
+};
 </script>
