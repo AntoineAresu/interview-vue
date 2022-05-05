@@ -5,6 +5,13 @@
       <v-col cols="12" class="text-center mt-10">
         <h1>Beneficiaries</h1>
       </v-col>
+      <v-col cols="12" class="v-col-lg-4 offset-lg-2">
+        <v-text-field
+            prepend-inner-icon="mdi-account-search-outline"
+            label="Search"
+            @input.prevent="searchBeneficiaries"
+        ></v-text-field>
+      </v-col>
       <v-col cols="12" class="v-col-lg-8 mx-auto">
         <v-table class="bg-brown-lighten-3 elevation-4">
           <thead>
@@ -46,4 +53,20 @@ onMounted(() =>
       router.push("login");
     })
 );
+
+const searchBeneficiaries = async (event) => {
+  const search = event.target.value;
+  console.log(search)
+  await axios
+    .get(`http://localhost:8000/api/beneficiaries?name=${search}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      console.log(response)
+      beneficiaries.value = response.data;
+    })
+  .catch((err) => {
+    console.log(err)
+  });
+};
 </script>
