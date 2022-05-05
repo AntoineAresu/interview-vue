@@ -5,6 +5,7 @@
   >
     <v-toolbar-title>
       <v-icon>mdi-account</v-icon>
+      {{ userStore.email }}
     </v-toolbar-title>
     <v-toolbar-items>
       <v-btn>
@@ -16,4 +17,7 @@
 </template>
 
 <script setup>
+import { useUserStore } from "@/store/usersStore";
+
+const userStore = useUserStore();
 </script>

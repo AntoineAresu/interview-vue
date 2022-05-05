@@ -45,9 +45,11 @@
 import { ref } from "vue";
 import axios from "axios";
 import router from "@/router";
+import { useUserStore } from "@/store/usersStore";
 
 const email = ref("");
 const password = ref("");
+const userStore = useUserStore();
 
 const login = async () => {
   const user = {
@@ -59,6 +61,7 @@ const login = async () => {
     localStorage.setItem("access_token", response.data.access_token);
   });
 
+  userStore.login(user);
   await router.push("/");
 };
 </script>
