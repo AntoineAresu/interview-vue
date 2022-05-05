@@ -35,7 +35,10 @@
               <td>{{ beneficiary.id }}</td>
               <td>{{ beneficiary.name }}</td>
               <td class="text-center">
-                <v-btn class="bg-red-darken-4 elevation-0 mr-lg-2 my-2">
+                <v-btn
+                  @click.prevent="deleteBeneficiary(beneficiary)"
+                  class="bg-red-darken-4 elevation-0 mr-lg-2 my-2"
+                >
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </td>
@@ -69,6 +72,17 @@ onMounted(() =>
       router.push("login");
     })
 );
+
+const deleteBeneficiary = async (beneficiary) => {
+  console.log(beneficiary.id)
+  await axios
+    .delete(`${beneficiariesEndpoint}/${beneficiary.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(() => {
+      beneficiaries.value.splice(beneficiaries.value.indexOf(beneficiary), 1);
+    });
+};
 
 const searchBeneficiaries = async (event) => {
   const search = event.target.value;
