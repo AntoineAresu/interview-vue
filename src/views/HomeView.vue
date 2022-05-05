@@ -7,9 +7,9 @@
       </v-col>
       <v-col cols="12" class="v-col-lg-4 offset-lg-2">
         <v-text-field
-            prepend-inner-icon="mdi-account-search-outline"
-            label="Search"
-            @input.prevent="searchBeneficiaries"
+          prepend-inner-icon="mdi-account-search-outline"
+          label="Search"
+          @input.prevent="searchBeneficiaries"
         ></v-text-field>
       </v-col>
       <v-col cols="12" class="v-col-lg-8 mx-auto">
