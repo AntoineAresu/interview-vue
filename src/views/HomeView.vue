@@ -27,12 +27,18 @@
             <tr>
               <th class="text-left">Id</th>
               <th class="text-left">Name</th>
+              <th class="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="beneficiary in beneficiaries" :key="beneficiary.id">
               <td>{{ beneficiary.id }}</td>
               <td>{{ beneficiary.name }}</td>
+              <td class="text-center">
+                <v-btn class="bg-red-darken-4 elevation-0 mr-lg-2 my-2">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </td>
             </tr>
           </tbody>
         </v-table>
