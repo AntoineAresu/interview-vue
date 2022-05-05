@@ -1,11 +1,12 @@
 <template>
-Hello
+  <app-bar/>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
 import axios from "axios";
 import router from "@/router";
+import AppBar from "@/components/AppBar.vue";
 
 const token = localStorage.getItem("access_token");
 
