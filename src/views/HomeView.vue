@@ -7,10 +7,19 @@
       </v-col>
       <v-col cols="12" class="v-col-lg-4 offset-lg-2">
         <v-text-field
-            prepend-inner-icon="mdi-account-search-outline"
-            label="Search"
-            @input.prevent="searchBeneficiaries"
+          prepend-inner-icon="mdi-account-search-outline"
+          label="Search"
+          @input.prevent="searchBeneficiaries"
         ></v-text-field>
+      </v-col>
+      <v-col cols="12" class="v-col-lg-2 mx-auto">
+        <v-btn
+          @click.prevent="router.push('/beneficiary/create')"
+          block="true"
+          class="bg-green-darken-3 elevation-0 mr-lg-2 my-2"
+        >
+          <v-icon>mdi-account-plus-outline</v-icon>
+        </v-btn>
       </v-col>
       <v-col cols="12" class="v-col-lg-8 mx-auto">
         <v-table class="bg-brown-lighten-3 elevation-4">
@@ -18,12 +27,21 @@
             <tr>
               <th class="text-left">Id</th>
               <th class="text-left">Name</th>
+              <th class="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="beneficiary in beneficiaries" :key="beneficiary.id">
               <td>{{ beneficiary.id }}</td>
               <td>{{ beneficiary.name }}</td>
+              <td class="text-center">
+                <v-btn
+                  @click.prevent="deleteBeneficiary(beneficiary)"
+                  class="bg-red-darken-4 elevation-0 mr-lg-2 my-2"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </td>
             </tr>
           </tbody>
         </v-table>
@@ -54,6 +72,17 @@ onMounted(() =>
       router.push("login");
     })
 );
+
+const deleteBeneficiary = async (beneficiary) => {
+  console.log(beneficiary.id)
+  await axios
+    .delete(`${beneficiariesEndpoint}/${beneficiary.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(() => {
+      beneficiaries.value.splice(beneficiaries.value.indexOf(beneficiary), 1);
+    });
+};
 
 const searchBeneficiaries = async (event) => {
   const search = event.target.value;
